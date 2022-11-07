@@ -1,14 +1,10 @@
-
 const fs = require('fs');
 const path = require('path');
-
 const projectPath = path.join(path.dirname(__filename),'project-dist');
 const stylesPath = path.join(path.dirname(__filename),'styles');
 const tamplatePath = path.join(path.dirname(__filename),'template.html');
 const componentsPath = path.join(path.dirname(__filename),'components');
 const assetsPath = path.join(path.dirname(__filename),'assets');
-
-
 
 async function concatenateStyles() {
   fs.writeFile(path.join(projectPath, 'style.css'), '' , (err) => {
@@ -43,7 +39,6 @@ async function updateIndex() {
     for(let component of components) {
       const fileName = path.parse(component).name; 
       const componentPath = path.join(componentsPath,component);
-  
       const componetContent = await fs.promises.readFile(componentPath, 'utf-8');
   
       let regexp = new RegExp(`{{${fileName}}}`, 'g'); 
@@ -102,8 +97,6 @@ function copyDir( ) {
   copyFolder(assetsPath, assetsCopyPath);
 }
 
-
-
 function buildHTML () {
   fs.access(projectPath, fs.F_OK, (err) => {
     if (err) {
@@ -116,7 +109,6 @@ function buildHTML () {
   concatenateStyles();
   updateIndex();
   console.log('Everything is ready to watch');
-
 }
 
 buildHTML();
