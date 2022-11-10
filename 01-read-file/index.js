@@ -6,6 +6,6 @@ const stream = fs.createReadStream(file, 'UTF-8');
 
 let result = '';
 
-stream.on('result', elem => result += elem);
+stream.on('data', elem => result += elem);
 stream.on('error', err => console.log("Error", err.message));
 stream.on('end', () => console.log(result));
